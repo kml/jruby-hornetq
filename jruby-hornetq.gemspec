@@ -2,6 +2,8 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'hornetq/version'
+require 'date'
+require 'rake'
 
 Gem::Specification.new do |s|
   s.name        = 'jruby-hornetq'
@@ -12,7 +14,7 @@ Gem::Specification.new do |s|
   s.date        = Date.today.to_s
   s.description = 'JRuby-HornetQ is a Java and Ruby library that exposes the HornetQ Java API in a ruby friendly way. For JRuby only.'
   s.summary     = 'JRuby interface into HornetQ'
-  s.files       = FileList["./**/*"].exclude(/.gem$/, /.log$/,/^nbproject/).map{|f| f.sub(/^\.\//, '')}
+  s.files       = Rake::FileList["./**/*"].exclude(/.gem$/, /.log$/,/^nbproject/).map{|f| f.sub(/^\.\//, '')}
   s.license     = "Apache License V2.0"
   s.has_rdoc    = true
   s.executables = %w(hornetq_server)
