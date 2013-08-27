@@ -13,11 +13,12 @@ module HornetQ
 
   # Allow override of our included jars so we don't have to keep up with hornetq releases
   def self.require_jar(jar_name)
-    if ENV['HORNETQ_HOME']
-      require "#{ENV['HORNETQ_HOME']}/lib/#{jar_name}.jar"
-    else
-      require "hornetq/java/#{jar_name}.jar"
-    end
+    base_dir = ENV['HORNETQ_HOME'] ? "#{ENV['HORNETQ_HOME']}/lib" : File.expand_path("../hornetq/java", __FILE__)
+    jars = Dir[File.join(base_dir, "#{jar_name}-[0-9]*.jar")]
+    raise ArgumentError, "Too many matching jars for #{jar_name.inspect}: #{jars}" if jars.size > 1
+    raise LoadError, "no such jar to load -- #{jar_name}" if jars.size == 0
+
+    require jars.first
   end
 
   def self.netty_port(port)
