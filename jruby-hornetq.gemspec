@@ -18,5 +18,5 @@ Gem::Specification.new do |s|
   s.license     = "Apache License V2.0"
   s.has_rdoc    = true
   s.executables = %w(hornetq_server)
-  s.add_dependency "gene_pool", "~> 1.1.1"
+  s.add_dependency "gene_pool", "~> 1.3.0"
 end
