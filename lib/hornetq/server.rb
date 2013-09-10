@@ -53,7 +53,13 @@ module HornetQ
         end
       end
 
-      if Java::org.hornetq.core.journal.impl.AIOSequentialFileFactory.isSupported
+      is_aio_supported = begin
+        Java::org.hornetq.core.journal.impl.AIOSequentialFileFactory.isSupported
+      rescue NameError
+        false
+      end
+
+      if is_aio_supported #Java::org.hornetq.core.journal.impl.AIOSequentialFileFactory.isSupported
         config.journal_type = Java::org.hornetq.core.server.JournalType::ASYNCIO
       else
         require 'rbconfig'
