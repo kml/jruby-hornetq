@@ -1,4 +1,5 @@
 # encoding: utf-8
+
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'hornetq/version'
@@ -19,4 +20,6 @@ Gem::Specification.new do |s|
   s.has_rdoc    = true
   s.executables = %w(hornetq_server)
   s.add_dependency "gene_pool", "~> 1.3.0"
+  s.require_paths = ['lib', 'vendor']
 end
+
